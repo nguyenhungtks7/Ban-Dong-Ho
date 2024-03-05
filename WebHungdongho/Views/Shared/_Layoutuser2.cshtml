@@ -1,0 +1,560 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        img {
+            cursor: pointer;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        header-top-top {
+            background: rgb(0, 0, 0);
+            width: 100%;
+            height: 60px;
+        }
+
+        .header-top {
+            background: rgb(0, 0, 0);
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+            height: 60px;
+        }
+
+        .header-bottom {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+
+        .search-box {
+            width: 230px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 10px;
+            outline: none;
+        }
+
+
+
+
+        .dynamic {
+            width: 100%;
+        }
+
+        header {
+            position: fixed;
+            background-color: #333;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 999;
+        }
+
+        #Menu1 {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+            #Menu1 ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+            }
+
+                #Menu1 ul li {
+                    flex: 1;
+                    text-align: center;
+                    position: relative;
+                    transition: transform 0.3s;
+                    background-image: none;
+                }
+
+                    #Menu1 ul li a {
+                        text-decoration: none;
+                        color: #fff;
+                        font-size: 14px;
+                        display: block;
+                        margin-right: 108px;
+                        padding: 15px 0;
+                        transform: perspective(3px) translateZ(0);
+                        transition-duration: 0.3s;
+                        font-family: Source Sans Pro;
+                        width: 100%;
+                        font-weight: 700;
+                    }
+
+                    #Menu1 ul li:hover a {
+                        background: #444;
+                        transform: scale(1.10);
+                        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+                    }
+
+                    #Menu1 ul li:hover {
+                        transform: translateY(-5px);
+                    }
+
+                #Menu1 ul ul {
+                    display: none;
+                    margin-top: -6px;
+                }
+
+                #Menu1 ul li:hover ul {
+                    display: block;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: #333;
+                    transform: translateY(10px);
+                }
+
+                #Menu1 ul ul li {
+                    text-align: left;
+                }
+
+                    #Menu1 ul ul li a {
+                        padding: 10px;
+                    }
+
+                        #Menu1 ul ul li a:hover {
+                            background-color: #444;
+                        }
+
+        /* container*/
+        .container {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        /*footer*/
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-nd {
+            font-size: 14px;
+        }
+
+        .footer-map {
+            font-size: 14px;
+        }
+
+        .footer strong {
+            font-weight: bold;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            .footer a:hover {
+                text-decoration: underline;
+            }
+
+        .footer iframe {
+            border: 0;
+        }
+
+        /*_______*/
+
+
+        .dangnhap, .dangky {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+            .dangnhap a, .dangky a {
+                text-decoration: none;
+                padding: 10px 15px;
+                /*border: 1px solid #ccc;*/
+
+                color: #ccc;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .dangnhap a:hover, .dangky a:hover {
+                    background-color: #ccc;
+                    color: rgb(0, 0, 0);
+                }
+
+        /*      .btndangxuat {
+            font-size: 15px;
+            background: #000000;
+            padding: 11px 20px;
+            margin-left: 17px;
+            border: 1px solid WHITE;
+            border-radius: 5px;
+            color: white;
+        }
+
+            .btndangxuat:hover {
+                background-color: #ccc;
+                color: rgb(0, 0, 0);
+                cursor: pointer;
+            }*/
+
+        .user {
+            position: relative;
+        }
+
+        .user-select {
+            position: absolute;
+            width: 224px;
+            top: 14%;
+            border-radius: 4px;
+            background-color: #fff;
+            z-index: 1;
+            display: none;
+            right: 14px;
+            list-style: none;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            animation: fadein ease-out 0.3s;
+        }
+
+            .user-select a {
+                text-decoration: none;
+                font-size: 20px;
+                color: #fff;
+            }
+
+            .user-select li {
+                list-style: none;
+                background-color: #333;
+                border: solid 1px;
+            }
+
+                .user-select li:hover {
+                    background-color: #fff;
+                }
+
+            .user-select a:hover {
+                color: #333;
+            }
+
+        .nav-user-img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .user-open .user-select {
+            display: block;
+        }
+
+
+
+        /*Banner*/
+        .banner img {
+            height: 544px;
+            width: 100%;
+        }
+
+        .slideshow-container {
+            width: 100%;
+            height: 50%;
+            position: relative;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: rgba(146, 146, 146, 0.681);
+            font-weight: 500;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            font-size: 20px;
+        }
+
+
+        .prev {
+            transform: scale(1.1);
+            left: 0;
+            border-radius: 0 50px 50px 0;
+            background-color: rgba(209, 202, 202, 0.151);
+        }
+
+            .prev:hover, .next:hover {
+                transform: scale(1.1);
+                background-color: #c5c1c1c6;
+                color: rgba(255, 255, 255, 0.958);
+            }
+
+
+        .next {
+            transform: scale(1.1);
+            right: 0;
+            border-radius: 50px 0 0 50px;
+            background-color: rgba(209, 202, 202, 0.151);
+        }
+
+
+        .text {
+            color: black;
+            font-size: 16px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+
+        .dot {
+            cursor: pointer;
+            height: 13px;
+            width: 13px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+
+            .active, .dot:hover {
+                background-color: #717171;
+            }
+    </style>
+</head>
+<body>
+
+    <div>
+        <header>
+            <div class="header-top-top" style="background: rgb(0, 0, 0);">
+                <div class="header-top">
+                    <a href="WebForm1.aspx">
+                        <img class="logo" style="width: 104px; height: 50px;"
+                             src="/img/Screenshot 2023-10-14 112155.png">
+                    </a>
+                    <div>
+                        <img class="hotline" style="width: 229px; height: 50px;" src="/img/Screenshot 2023-10-14 115219.png">
+                    </div>
+                    <div>
+                        <input type="text" class="search-box" placeholder="Tìm kiếm...">
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="dangnhap">
+                        <a ID="hldonhang" href="@Url.Action("DonHangkhachhang", "DonHangs")" runat="server">ĐƠN HÀNG</a>
+                    </div>
+                    <a href="@Url.Action("Index", "GioHang")">
+                      
+                        <img style="    width: 38px; height: 28px;
+"
+                             src="/img/Screenshot 2023-10-14 120645.png">
+                    </a>
+                    @if (Session["tenUser"] == null)
+                    {
+                        <div class="dangnhap">
+                            <a ID="hlDangNhap" runat="server" href="@Url.Action("Dangnhap", "Index")">ĐĂNG NHẬP</a>
+                        </div>
+                        <div class="dangky">
+                            <a ID="hlDangKy" runat="server" href="@Url.Action("DangKy", "Index")">ĐĂNG KÝ</a>
+                        </div>
+                    }
+                    else
+                    {
+
+                        @*<a href="#" class="nav-item-link" onmouseover="showOptions()" onmouseout="hideOptions()">
+                                <h4 style="color: aliceblue">
+                                    Xin chào,  @Session["tenUser"]
+                                </h4>
+                                <img class="nav-user-img" src="~/img/admin.jpg" alt="User Image">
+                            </a>
+
+                            <ul>
+                                <li>
+                                    @Html.ActionLink("Đổi mật khẩu", "doimatkhau", "Index", new { }, new { @class = "btndangxuat" })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("ĐĂNG XUẤT", "Dangxuat", "Index", new { }, new { @class = "btndangxuat" })
+                                </li>
+                            </ul>*@
+                        <div class="nav-item-list user">
+                            <a href="#" class="nav-item-link" style="color: aliceblue; text-decoration: none; display: flex ">
+                                <h4 style="color: aliceblue; line-height: 40px; font-size: 20px; margin-right: 20px; ">
+                                    Xin chào,  @Session["tenUser"]
+                                </h4>
+                                <img class="nav-user-img" src="~/img/admin.jpg" alt="User Image">
+                            </a>
+                            <div class="user-select" style="top:40px;">
+
+                                <span class="border-style"></span>
+
+                                <ul class="user-item">
+                                    <li class="user-list">
+                                        @Html.ActionLink("Đổi mật khẩu", "DoimatkhauUser", "Index", new { }, new { @class = "btndangxuat" })
+                                    </li>
+                                    <li class="user-list">
+                                        @Html.ActionLink("Đăng xuất", "Dangxuat", "Index", new { }, new { @class = "btndangxuat" })
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    }
+
+
+
+                </div>
+            </div>
+            <div class="header-bottom">
+                <div id="Menu1">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Index")">Trang chủ</a></li>
+                        <li>
+                            <a href="@Url.Action("danhmuc", "Index", new { Danhmuc = "Đồng Hồ Nam" })">Đồng hồ nam</a>
+                            <ul>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nam", NhanHieu = "Longines" })">Đồng hồ nam Longines</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nam", NhanHieu = "Maurice Lacroix" })">Đồng hồ nam Maurice Lacroix</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nam", NhanHieu = "gucci" })">Đồng hồ nam gucci</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nam", NhanHieu = "tissot" })">Đồng hồ nam tissot</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("danhmuc", "Index", new { Danhmuc = "Đồng Hồ Nữ" })">Đồng hồ nữ</a>
+                            <ul>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nữ", NhanHieu = "Longines" })">Đồng hồ nữ Longines</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nữ", NhanHieu = "Maurice Lacroix" })">Đồng hồ nữ Maurice Lacroix</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nữ", NhanHieu = "gucci" })">Đồng hồ nữ gucci</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Nữ", NhanHieu = "tissot" })">Đồng hồ nữ tissot</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("danhmuc", "Index", new { Danhmuc = "Đồng Hồ Cơ" })">Đồng hồ cơ</a>
+                            <ul>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Cơ", NhanHieu = "Longines" })">Đồng hồ cơ Longines</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Cơ", NhanHieu = "Maurice Lacroix" })">Đồng hồ cơ Maurice Lacroix</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Cơ", NhanHieu = "gucci" })">Đồng hồ cơ gucci</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Cơ", NhanHieu = "tissot" })">Đồng hồ cơ tissot</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("danhmuc", "Index", new { Danhmuc = "Đồng Hồ Pin" })">Đồng hồ pin</a>
+                            <ul>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Pin", NhanHieu = "Longines" })">Đồng hồ pin Longines</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Pin", NhanHieu = "Maurice Lacroix" })">Đồng hồ pin Maurice Lacroix</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Pin", NhanHieu = "gucci" })">Đồng hồ pin gucci</a></li>
+                                <li><a href="@Url.Action("danhmuc2", "Index", new { Danhmuc = "Đồng Hồ Pin", NhanHieu = "tissot" })">Đồng hồ pin tissot</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Đánh giá</a>
+                            <ul>
+                                <li><a href="@Url.Action("SendMessage", "LienHes")">Liên hệ</a></li>
+                                <li><a href="@Url.Action("Binhluan", "Binhluan")">Phản hồi</a></li>
+                               
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+
+
+        </header>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+
+
+        <div class="container">
+            @RenderBody()
+            @RenderSection("scripts", required: false)
+        </div>
+        <div style="background: #333;">
+
+
+            <div class="footer">
+                <div name="footer-nd">
+                    <br />
+                    <p>Website được phát triển & vận hành bởi hệ thống: <strong>ĐỒNG HỒ CHÍNH HÃNG</strong></p>
+                    <br />
+                    
+                    <p>Cấp ngày: 12/9/2023 | Nơi cấp: Hà Nội</p>
+                    <br />
+                    <p>Email: <a href="mailto:hotro@donghochinhhang.com">hotro@donghochinhhang.com</a></p>
+                    <br />
+                    <p>Tel: (094) 5 968 013</p>
+                    <br />
+                </div>
+                <div name="footer-you">
+                    <div class="fb-like" data-href="https://www.facebook.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+
+                </div>
+
+                <div name="footer-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.3077152215537!2d105.8736443747645!3d20.980298780656934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135afd765487289%3A0x21bd5839ba683d5f!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBLaW5oIFThur8gLSBL4bu5IFRodeG6rXQgQ8O0bmcgTmdoaeG7h3A!5e0!3m2!1svi!2s!4v1689386949867!5m2!1svi!2s" width="320" height="230" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+            </div>
+            <p style="color: aliceblue; text-align: center; font-size: 9px">© Bản quyền thuộc về nguyenhung.com | Vận hành bởi: Công ty TNHH Hungdongho| 5S</p>
+            <p style="color: aliceblue; text-align: center; font-size: 9px"> <img src="/img/iconft.png"></p>
+
+        </div>
+
+    </div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="your-nonce-value"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.nav-item-link').click(function () {
+                $('.user').toggleClass('user-open');
+            });
+
+            // Close the user-select when clicking outside of it
+            $(document).click(function (event) {
+                if (!$(event.target).closest('.user').length) {
+                    $('.user').removeClass('user-open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+

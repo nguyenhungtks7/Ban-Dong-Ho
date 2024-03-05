@@ -1,0 +1,85 @@
+﻿@model WebHungdongho.Models.Updatepassword
+@{
+    ViewBag.Title = "DoimatkhauUser";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    body {
+        background-color: #f8f9fa; 
+    }
+
+    .center-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .form-container {
+        background-color: #ffffff; 
+        border: 1px solid #dcdcdc;
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+        border-radius: 8px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    }
+
+        .form-container h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; 
+            border-color: #0056b3;
+        }
+
+    .text-danger {
+        color: #dc3545; 
+    }
+</style>
+
+<div class="center-container">
+    <div class="form-container">
+        <h2 class="mt-4">Đổi mật khẩu</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentPassword, htmlAttributes: new { @class = "control-label" })
+                @Html.PasswordFor(model => model.CurrentPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CurrentPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label" })
+                @Html.PasswordFor(model => model.NewPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mt-2" })
+        }
+    </div>
+</div>

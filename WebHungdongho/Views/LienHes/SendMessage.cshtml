@@ -1,0 +1,161 @@
+﻿@model WebHungdongho.Models.LienHe
+@{
+    ViewBag.Title = "SendMessage";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+<style>
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+    h1 {
+        color: #333;
+        text-align: center;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 20px auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .btn {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    .alert {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #155724;
+        background-color: #d4edda;
+    }
+
+    .alert-success {
+        border-color: #c3e6cb;
+        color: #155724;
+        background-color: #d4edda;
+    }
+    .text-danger{
+        color:red;
+    }
+</style>
+
+<br />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Liên hệ</span>
+</div>
+
+<h1 style="text-align:center">Liên hệ với chúng tôi</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoTen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.NgayLienHe, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Gửi thông điệp" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <div id="success-message" class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+@*@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <script>
+
+            alert('@Html.Raw(ViewBag.SuccessMessage)');
+        </script>
+    }*@

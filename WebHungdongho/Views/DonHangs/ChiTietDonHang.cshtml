@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebHungdongho.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+    .empty-cart-message {
+        font-size: 18px;
+        color: #555;
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 200px 0;
+    }
+    .product-image {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 5px;
+    }
+</style>
+<br />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <a href="@Url.Action("DonHangkhachhang", "DonHangs")"> <span>Đơn Hàng</span></a>
+    <span>&gt;</span>
+    <span>Chi tiết đơn hàng</span>
+</div>
+@if (ViewBag.ChiTietDonHang != null && ViewBag.ChiTietDonHang.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SanPham.TenSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SanPham.DuongDanHinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaSP)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DonHang.HoTenDem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonHang.Ten)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/img/@item.SanPham.DuongDanHinh" alt="Product Image" class="product-image" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.Raw(string.Format("{0:#,##0}₫", item.GiaSP))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonHang.HoTenDem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonHang.Ten)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p class="empty-cart-message">Đơn hàng đang trống, bạn hãy tiếp tục mua sản phẩm <a href="@Url.Action("Index", "Index")"> Trang chủ</a></p>
+}

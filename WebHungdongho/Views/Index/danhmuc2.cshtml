@@ -1,0 +1,157 @@
+﻿@model List<WebHungdongho.Models.SanPham>
+
+@{
+    ViewBag.Title = "danhmuc2";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+<style>
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product {
+        width: calc(25% - 20px);
+        background-color: #fff;
+        padding: 10px;
+        text-align: center;
+        font-family: Open Sans, sans-serif;
+    }
+
+    .imgprd {
+        max-width: 100%;
+        height: auto;
+        border: solid 1px #c0c0c0;
+    }
+
+        .imgprd:hover {
+            transform: scale(1.05);
+        }
+
+    .product h2 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .product p {
+        margin: 5px 0;
+    }
+
+    .product a {
+        text-decoration: none;
+    }
+
+    .product-percent-sale-new {
+        background: #d80027;
+        color: #fff;
+        text-align: center;
+        border-radius: 3px;
+        padding: 0.5px 3px;
+    }
+
+    .product-percent-sale-online {
+        margin-left: 4px;
+    }
+
+
+
+
+
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+    h1 span#ContentPlaceHolder1_Label1 {
+        color: #333;
+        font-size: 24px;
+        margin: 10px 0 5px 0;
+    }
+
+
+
+    .product-comments {
+        margin-top: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .comment-list {
+        list-style: none;
+        padding: 0;
+    }
+
+        .comment-list li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+    form {
+        margin-top: 15px;
+    }
+</style>
+<br />
+
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <a href="@Url.Action("Index", "Index")">Danh mục</a>
+    <span>&gt;</span>
+    <span> @Request.QueryString["Danhmuc"] @Request.QueryString["NhanHieu"]</span>
+</div>
+<h1><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></h1>
+<div class="products">
+
+    @foreach (var product in Model)
+    {
+        <div class='product'>
+            <a href='@Url.Action("Index", "Chitietsanpham", new { id = product.MaSP })'>
+                <img class='imgprd' src='/img/@product.DuongDanHinh' alt='@product.TenSP'>
+            </a>
+            <a href='@Url.Action("Index", "Chitietsanpham", new { id = product.MaSP })'>
+                <h2 style='font-size: 13px; padding: 10px 0px 3px; color: #334862; white-space: nowrap; text-overflow: ellipsis; font-weight: 400; margin: 0; overflow: hidden;'>@product.TenSP</h2>
+            </a>
+            <div style="display: flex; justify-content: space-between;">
+                <p>Giá tại shop</p>
+                <p>@(product.Gia.HasValue ? product.Gia.Value.ToString("#,##0") : "N/A")₫</p>
+            </div>
+            <div style='display: flex; justify-content: space-between;'>
+                <p style="color: red">Mua online </p>
+                <span class="product-percent-sale-new product-percent-sale-online hidden-xs">-15% </span>
+                <p>
+                    @if (product.Gia.HasValue)
+                    {
+                        decimal giaSauGiam = product.Gia.Value * 0.85m;
+                        <span>@giaSauGiam.ToString("#,##0")₫</span>
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </p>
+            </div>
+        </div>
+    }
+</div>

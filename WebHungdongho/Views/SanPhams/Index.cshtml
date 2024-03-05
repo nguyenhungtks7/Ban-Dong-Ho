@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebHungdongho.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .product-image {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 5px;
+    }
+
+    .table td:nth-child(3) {
+        max-width: 200px; /* Đặt giới hạn độ rộng cho cột MatKhau */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Để hiển thị "..." khi văn bản quá dài */
+        white-space: nowrap;
+    }
+</style>
+
+<h2 style="text-align:center">QUẢN LÝ SẢN PHẨM</h2>
+@using (Html.BeginForm())
+{
+    @Html.TextBox("key")
+    <input type="submit" value="Tìm kiếm" />
+}
+@if (!string.IsNullOrEmpty(ViewBag.cr))
+{
+    <p style="color:red">@ViewBag.cr</p>
+}
+@if (!string.IsNullOrEmpty(ViewBag.check))
+{
+    <p style="color:red">@ViewBag.check</p>
+}
+else
+{
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Thêm sản phẩm", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    </p>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanHieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongKho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DuongDanHinh)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhanHieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.Raw(string.Format("{0:#,##0}₫", item.Gia))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongKho)
+                </td>
+                <td>
+                    <img src="~/img/@item.DuongDanHinh" alt="Product Image" class="product-image" />
+
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaSP }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Xem", "Details", new { id = item.MaSP }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaSP }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}

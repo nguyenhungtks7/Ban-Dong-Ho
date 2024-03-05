@@ -1,0 +1,39 @@
+﻿@model WebHungdongho.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .form-horizontal {
+        margin-top: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .btn-default {
+        background-color: #337ab7;
+        color: #fff;
+    }
+</style>
+<h2>Xem</h2>
+
+<div>
+    <h4>Danh Mục</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDanhMuc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaDanhMuc }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

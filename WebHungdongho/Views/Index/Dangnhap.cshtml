@@ -1,0 +1,135 @@
+﻿@model WebHungdongho.Models.LoginModel
+@{
+    ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+<style>
+    .bodydangnhap {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .login-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+    }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            text-align: left;
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+            .form-group input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+            .form-group input[type="submit"]:last-child {
+                background-color: #dc3545;
+            }
+
+                .form-group input[type="submit"]:last-child:hover {
+                    background-color: #c82333;
+                }
+
+        .form-group input[type="reset"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+            .form-group input[type="reset"]:hover {
+                background-color: #0056b3;
+            }
+
+            .form-group input[type="reset"]:last-child {
+                background-color: #dc3545;
+            }
+
+                .form-group input[type="reset"]:last-child:hover {
+                    background-color: #c82333;
+                }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+<br />
+<br />
+
+@if (!string.IsNullOrEmpty(ViewBag.DangKySuccessMessage))
+{
+    <div class="alert alert-success">@ViewBag.DangKySuccessMessage</div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="bodydangnhap">
+        <div class="login-container">
+            <h2>Đăng nhập</h2>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Nhập tên đăng nhập" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btndangnhap" value="Đăng nhập" class="btn btn-primary" />
+                <input type="reset" id="btnnhaplai" value="Nhập lại" class="btn btn-secondary" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+

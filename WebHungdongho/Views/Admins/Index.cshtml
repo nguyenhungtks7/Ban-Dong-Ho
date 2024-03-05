@@ -1,0 +1,104 @@
+﻿@model IEnumerable<WebHungdongho.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .form-horizontal {
+        margin-top: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .btn-default {
+        background-color: #337ab7;
+        color: #fff;
+    }
+
+    .table td:nth-child(4) {
+        max-width: 100px; /* Đặt giới hạn độ rộng cho cột MatKhau */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Để hiển thị "..." khi văn bản quá dài */
+        white-space: nowrap;
+    }
+</style>
+<h2 style="text-align:center">Quản lý Admin</h2>
+@using (Html.BeginForm())
+{
+    @Html.TextBox("key")
+    <input type="submit" value="Tìm kiếm" />
+}
+@if (!string.IsNullOrEmpty(ViewBag.cr))
+{
+    <p style="color:red">@ViewBag.cr</p>
+}
+@if (!string.IsNullOrEmpty(ViewBag.check))
+{
+    <p style="color:red">@ViewBag.check</p>
+}
+else
+{
+    <br /><br />
+    <p>
+        @Html.ActionLink("Thêm khách hàng", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    </p>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTenDem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDangNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mod)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTenDem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDangNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaUser }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Xem", "Details", new { id = item.MaUser }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaUser }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

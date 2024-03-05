@@ -1,0 +1,85 @@
+﻿@model WebHungdongho.Models.SanPham
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .form-horizontal {
+        margin-top: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .btn-default {
+        background-color: #337ab7;
+        color: #fff;
+    }
+</style>
+<h2>Xóa</h2>
+
+<h3>Bạn chắc chắn muốn xóa không?</h3>
+<div>
+    <h4>Sản phẩm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongKho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongKho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DuongDanHinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DuongDanHinh)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

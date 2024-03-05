@@ -1,0 +1,93 @@
+﻿@model WebHungdongho.Models.DonHang
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .form-horizontal {
+        margin-top: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .btn-default {
+        background-color: #337ab7;
+        color: #fff;
+    }
+</style>
+<h2>Xóa</h2>
+
+<h3>Bạn chắc chắn muốn xóa không?</h3>
+<div>
+    <h4>DonHang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDatHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDatHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTenDem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTenDem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.HoTenDem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.HoTenDem)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

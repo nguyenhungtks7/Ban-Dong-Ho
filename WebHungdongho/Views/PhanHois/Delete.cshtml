@@ -1,0 +1,61 @@
+﻿@model WebHungdongho.Models.PhanHoi
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    .form-horizontal {
+        margin-top: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .btn-default {
+        background-color: #337ab7;
+        color: #fff;
+    }
+</style>
+<h2>Xóa</h2>
+
+<h3>Bạn chắc chắn muốn muốn xóa không?</h3>
+<div>
+    <h4>PhanHoi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayPhanHoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayPhanHoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.HoTenDem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.HoTenDem)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

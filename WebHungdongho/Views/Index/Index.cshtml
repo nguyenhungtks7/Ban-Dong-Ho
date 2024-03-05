@@ -1,0 +1,519 @@
+﻿@model List<WebHungdongho.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutuser.cshtml";
+}
+
+
+<style>
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product {
+        width: calc(25% - 20px);
+        background-color: #fff;
+        padding: 10px;
+        text-align: center;
+        font-family: Open Sans, sans-serif;
+    }
+
+    .imgprd {
+        max-width: 100%;
+        height: auto;
+        border: solid 1px #c0c0c0;
+    }
+
+        .imgprd:hover {
+            transform: scale(1.05);
+        }
+
+    .product h2 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .product p {
+        margin: 5px 0;
+    }
+
+    .product a {
+        text-decoration: none;
+    }
+
+    .product-percent-sale-new {
+        background: #d80027;
+        color: #fff;
+        text-align: center;
+        border-radius: 3px;
+        padding: 0.5px 3px;
+    }
+
+    .product-percent-sale-online {
+        margin-left: 4px;
+    }
+
+    h1 {
+        font-family: Courier new;
+        color: #5f5f5f;
+        text-transform: uppercase;
+        text-align: center;
+        border-bottom: 2px solid #37353595;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+
+    .slideshow {
+        width: 68%;
+        padding: 2px;
+        overflow: hidden;
+    }
+
+        .slideshow img {
+            width: 100%;
+            display: none;
+            height: 372px;
+        }
+
+    .containercssc {
+        width: 29%;
+        padding-left: 20px;
+    }
+
+    .image-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .image-group img {
+            width: 150px;
+            height: 170px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+            .image-group img:hover {
+                transform: scale(1.1);
+            }
+    /*css tin tức*/
+    .news-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .news-article {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .news-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .news-date {
+        color: #888;
+    }
+
+    .news-content {
+        margin-top: 10px;
+    }
+
+    .news-container a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+        .news-container a:hover {
+            text-decoration: none;
+            color: dodgerblue;
+        }
+
+    .products-doitac {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product-doitac {
+        width: calc(14.2% - 2px);
+        background-color: #fff;
+        text-align: center;
+        font-family: Open Sans, sans-serif;
+    }
+
+    .products-hethong {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .product-hethong {
+        width: calc(50% - 30px);
+        background-color: #fff;
+        text-align: center;
+        font-family: Open Sans, sans-serif;
+    }
+</style>
+<div style="display: flex; margin-top: 10px;">
+    <div class="slideshow">
+        <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Nam">
+            <img src="/img/banner6.jpg" style="width: 100%;">
+        </a>
+        <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Nữ">
+            <img src="/img/banner7.jpg" style="width: 100%;">
+        </a>
+        <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Cơ">
+            <img src="/img/banner8.jpg" style="width: 100%;">
+        </a>
+        <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Pin">
+            <img src="/img/banner9.0.jpg" style="width: 100%;">
+        </a>
+
+    </div>
+    <div style="width: 3%">
+    </div>
+    <div class="containercssc">
+        <div class="image-group">
+            <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Nam">
+                <img src="/img/donghonam.png">
+            </a>
+            <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Nữ">
+                <img src="/img/donghonu.png">
+            </a>
+        </div>
+        <div class="image-group" style="margin-top: 35px;">
+            <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Cơ">
+                <img src="/img/donghoco.png">
+            </a>
+            <a href="WebFormdanhmuc2.aspx?Danhmuc=Đồng Hồ Pin">
+                <img src="/img/donghopin.png">
+            </a>
+        </div>
+    </div>
+</div>
+<!-- -----------------------THƯƠNG HIỆU NỔI TIẾNG----------------------------------------- -->
+<h1>____________________Thương Hiệu nổi tiếng____________________</h1>
+
+<div class="products">
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu1.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu2.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu3.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu4.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu5.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu6.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu7.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu8.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu9.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu10.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu11.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product">
+        <a href="#">
+            <img class="imgprd" src="/img/thuonghieu12.png" alt="">
+        </a>
+    </div>
+</div>
+<!-- ----------------------- Đồng hồ nam----------------------------------------- -->
+<h1>_______________Dồng hồ nổi bật_____________</h1>
+<div class='products' >
+
+    @foreach (var product in Model)
+    {
+        <div class='product'>
+            <a href='@Url.Action("Index", "Chitietsanpham", new { id = product.MaSP })'>
+                <img class='imgprd' src='/img/@product.DuongDanHinh' alt='@product.TenSP'>
+            </a>
+            <a href='@Url.Action("Index", "Chitietsanpham", new { id = product.MaSP })'>
+                <h2 style='font-size: 13px; padding: 10px 0px 3px; color: #334862; white-space: nowrap; text-overflow: ellipsis; font-weight: 400; margin: 0; overflow: hidden;'>@product.TenSP</h2>
+            </a>
+            <div style="display: flex; justify-content: space-between;">
+                <p>Giá tại shop</p>
+                <p>@(product.Gia.HasValue ? product.Gia.Value.ToString("#,##0") : "N/A")₫</p>
+
+            </div>
+            <div style='display: flex; justify-content: space-between;'>
+                <p style="color: red">Mua online </p>
+                <span class="product-percent-sale-new product-percent-sale-online hidden-xs">-15% </span>
+                <p>
+                    @if (product.Gia.HasValue)
+                    {
+                        decimal giaSauGiam = product.Gia.Value * 0.85m;
+                        <span>@giaSauGiam.ToString("#,##0")₫</span>
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="video">
+    <div class="title_pos10" style="margin-top: 30px; margin-bottom: 10px; border-bottom: solid 1px #002744;">
+        <span style="display: inline-block; padding: 14px 36px 8px; color: #fff; background: #002744; clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0 100%);">
+            <a style="text-decoration: none; font-size: 20px; color: #fff; font-family: Open Sans, sans-serif;" href="https://www.youtube.com/channel/UCITbhU8ewkYVfIJiN9AcR_A" target="_blank" title="Tin Tức" rel="nofollow noopener noreferrer">TIN TỨC - VIDEO</a>
+        </span>
+    </div>
+    <div style="display: flex">
+        <div style="width: 50%">
+            <div class="news-container">
+                <div class="news-article">
+                    <a href="#">
+
+
+                        <h2 class="news-title">Bài viết số 1: Tự học lập trình</h2>
+                        <p class="news-date">Ngày đăng: 15/10/2023</p>
+                        <p class="news-content">Tự học lập trình là một quá trình học tập và phát triển kỹ năng lập trình mà bạn có thể thực hiện một cách độc lập. Hãy bắt đầu bằng việc tìm hiểu ngôn ngữ lập trình mà bạn quan tâm và thực hành nhiều nhất có thể.</p>
+                    </a>
+                </div>
+
+                <div class="news-article">
+                    <a href="#">
+
+
+                        <h2 class="news-title">Bài viết số 2: Cách nâng cao kỹ năng viết code</h2>
+                        <p class="news-date">Ngày đăng: 14/10/2023</p>
+                        <p class="news-content">Để trở thành một lập trình viên giỏi, bạn cần phải nâng cao kỹ năng viết code. Điều này bao gồm việc học cách sử dụng các công cụ phát triển, tạo project thực tế và tham gia vào cộng đồng lập trình.</p>
+                    </a>
+                </div>
+
+                <div class="news-article">
+                    <a href="#">
+
+                        <h2 class="news-title">Bài viết số 3: Hướng dẫn tạo trang web đơn giản</h2>
+                        <p class="news-date">Ngày đăng: 13/10/2023</p>
+                        <p class="news-content">Trong bài viết này, chúng ta sẽ hướng dẫn cách tạo một trang web đơn giản bằng HTML, CSS và JavaScript. Bạn sẽ tìm hiểu cách tạo giao diện và thêm tính năng cơ bản vào trang web của mình.</p>
+
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 50%; padding: 10px;">
+            <iframe width="100%" height="400" src="https://www.youtube.com/embed/6ZBkDISjv2c" frameborder="0" allowfullscreen></iframe>
+            <div>
+                <div class="products">
+                    <!-- --------------------------------------------- -->
+                    <div class="product">
+                        <a href="#">
+                            <iframe width="100%" height="100" src="https://www.youtube.com/embed/O7DX3TSOyqg" frameborder="0" allowfullscreen></iframe>
+                        </a>
+                    </div>
+                    <!-- --------------------------------------------- -->
+                    <div class="product">
+                        <a href="#">
+                            <iframe width="100%" height="100" src="https://www.youtube.com/embed/QSVZ_MpXLow" frameborder="0" allowfullscreen></iframe>
+                        </a>
+
+                    </div>
+                    <!-- --------------------------------------------- -->
+                    <div class="product">
+                        <a href="#">
+                            <iframe width="100%" height="100" src="https://www.youtube.com/embed/AcBUJkcN_SM" frameborder="0" allowfullscreen></iframe>
+                        </a>
+                    </div>
+                    <!-- --------------------------------------------- -->
+                    <div class="product">
+                        <a href="#">
+                            <iframe width="100%" height="100" src="https://www.youtube.com/embed/=d8PqHT-Crqs" frameborder="0" allowfullscreen></iframe>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- --------------------------------------------- -->
+<h1>____________CÁC ĐỐI TÁC CỦA CHÚNG TÔI____________</h1>
+<div class="products-doitac">
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac1.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac2.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac3.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac4.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac5.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac6.png" alt="">
+        </a>
+
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac7.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac8.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac9.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac10.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac11.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-doitac">
+        <a href="#">
+            <img class="imgprd" src="/img/doitac12.png" alt="">
+        </a>
+    </div>
+
+
+</div>
+<h1>________HỆ THỐNG SHOWROOM DONGHOCHINHHANG.COM________</h1>
+<div class="products-hethong" style="margin-bottom:20px">
+    <!-- --------------------------------------------- -->
+    <div clas="product-hethong">
+        <a href="#">
+            <img style="height:390px; width: 569px" src="/img/bannerft1.jpg" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-hethong">
+        <a href="#">
+            <img style="height:390px; width: 569px" src="/img/bannerft2.png" alt="">
+        </a>
+    </div>
+</div>
+<div class="products-hethong" style="margin-bottom:20px">
+    <!-- --------------------------------------------- -->
+    <div class="product-hethong">
+        <a href="#">
+            <img style="height:390px; width: 569px" src="/img/bannerft3.png" alt="">
+        </a>
+    </div>
+    <!-- --------------------------------------------- -->
+    <div class="product-hethong">
+        <a href="#">
+            <img style="height:390px; width: 569px" src="/img/bannerft4.png" alt="">
+        </a>
+    </div>
+</div>
+<script>
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.slideshow img');
+
+    function showNextImage() {
+        images[currentImageIndex].style.display = 'none';
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        images[currentImageIndex].style.display = 'block';
+    }
+
+    function startSlideshow() {
+        showNextImage();
+
+        setInterval(showNextImage, 3000);
+    }
+
+    startSlideshow();
+</script>

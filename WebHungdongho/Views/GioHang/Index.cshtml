@@ -1,0 +1,265 @@
+﻿@model IEnumerable<WebHungdongho.Models.CartItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+<style>
+
+
+    dau {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1em 0;
+    }
+
+    main {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #333;
+        color: white;
+    }
+
+    .cart-item img {
+        max-width: 80px;
+    }
+
+    .cart-total {
+        margin-top: 20px;
+        text-align: right;
+        font-size: 18px;
+    }
+
+    input[type=submit] {
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        input[type=submit] :hover {
+            background-color: #555;
+        }
+
+
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+
+    .palnel {
+        width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type=text], input[type=email], input[type=tel], input[type=password] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+
+    input[type=submit] {
+        background-color: #3498db;
+        color: #fff;
+        padding: 5px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+        input[type=submit]:hover {
+            background-color: #2980b9;
+        }
+
+    .btnRemove {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 3px;
+    }
+
+        .btnRemove:hover {
+            background-color: darkred;
+        }
+
+    .empty-cart-message {
+        font-size: 18px;
+        color: #555;
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 200px 0;
+    }
+</style>
+<br />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Giỏ hàng</span>
+</div>
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="dau">
+        <h1 style="text-align:center">Giỏ hàng của bạn</h1>
+    </div>
+    <div class="main">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành Tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    decimal tongcong = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr class="cart-item">
+                        <td>
+                            <p>@item.id</p>
+                            <img src="/img/@item.Img" alt="@item.Name">
+                            <span>@item.Name</span>
+                        </td>
+                        <td class="item-price" data-price="@item.Price">@item.Price.ToString("#,##0")₫</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateCart", "GioHang", FormMethod.Post))
+                            {
+                                @Html.Hidden("itemId", item.id)
+                                <input type="number" class="item-quantity" name="quantity" value="@item.Quantity" min="1">
+                                <input type="submit" value="Cập nhật" class="update-cart button" />
+                            }
+                        </td>
+                        <td class="item-total" style="color:red">@(string.Format("{0:#,##0}₫", item.Price * item.Quantity))</td>
+                        <td>
+                            @Html.ActionLink("Xóa", "RemoveItem", new { itemId = item.id }, new { @class = "btnRemove" })
+                        </td>
+                    </tr>
+                    tongcong += (item.Price * item.Quantity);
+                }
+            </tbody>
+        </table>
+
+        <div class="cart-total">
+
+
+
+            <div class="panel">
+                <p>Tổng cộng: <span id="txttong"> @(string.Format("{0:#,##0}₫", tongcong))</span></p>
+                <div class="palnel">
+                    <form method="post" action="@Url.Action("Checkout", "GioHang")">
+                        <div class="form-group">
+                            <input type="text" name="HoTenDem" placeholder="Nhập họ tên đệm" />
+                        </div>
+                        @if (string.IsNullOrEmpty(ViewBag.CheckHoTenDem))
+                        {
+                            <p> @ViewBag.CheckHoTenDem</p>
+                        }
+
+                        <div class="form-group">
+                            <input type="text" name="Ten" placeholder="Nhập tên" />
+                        </div>
+                        @if (string.IsNullOrEmpty(ViewBag.CheckTen))
+                        {
+                            <p> @ViewBag.Ten</p>
+                        }
+                        <div class="form-group">
+                            <input type="email" name="Email" placeholder="Nhập địa chỉ email" />
+                        </div>
+                        @if (string.IsNullOrEmpty(ViewBag.Email))
+                        {
+                            <p> @ViewBag.Email</p>
+                        }
+                        <div class="form-group">
+                            <input type="tel" name="SoDienThoai" placeholder="Nhập số điện thoại" />
+                        </div>
+                        @if (string.IsNullOrEmpty(ViewBag.CheckSoDienThoai))
+                        {
+                            <p> @ViewBag.CheckSoDienThoai</p>
+                        }
+                        <input type="hidden" value="@tongcong" name="thanhtien" />
+                        <div style="display: flex; justify-content: space-between">
+                            <input type="submit" class="btn btn-success" value="Thanh Toán" />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <p class="empty-cart-message">Giỏ hàng đang trống, bạn hãy tiếp tục mua sản phẩm <a href="@Url.Action("Index", "Index")"> Trang chủ</a></p>
+}

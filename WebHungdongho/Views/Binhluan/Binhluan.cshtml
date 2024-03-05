@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebHungdongho.Models.PhanHoi>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+
+
+
+<style>
+    h2 {
+        color: #007bff;
+        margin-top: 20px;
+    }
+
+    .comments-section {
+        margin-top: 20px;
+    }
+
+    .comment {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info strong {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .comment-content {
+        margin-top: 10px;
+        color: #495057;
+    }
+
+    .comment-date {
+        color: #888;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+</style>
+<br />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Phản hồi</span>
+</div>
+<h2>Phản hồi của các khách hàng</h2>
+<div class="comments-section">
+    @foreach (var item in Model)
+    {
+        <div class="comment">
+            <div class="user-info">
+                <strong>@item.User.HoTenDem @item.User.Ten</strong>
+            </div>
+            <div class="comment-content">@item.NoiDung</div>
+            <div class="comment-date">@item.NgayPhanHoi</div>
+        </div>
+    }
+</div>
+
+
+
+<form method="post" action="@Url.Action("AddComment", "Binhluan")">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="NoiDung" class="control-label">Nội Dung</label>
+        <input type="text" id="NoiDung" name="NoiDung" class="form-control" placeholder="Nhập nội dung" />
+    </div>
+    @if (string.IsNullOrEmpty(ViewBag.checkr))
+    {
+        <p style="color:red"> ViewBag.checkr</p>
+    }
+
+    <div style="display: flex; justify-content: space-between">
+        <button type="submit" class="btn btn-primary">Gửi Phản Hồi</button>
+    </div>
+</form>
+

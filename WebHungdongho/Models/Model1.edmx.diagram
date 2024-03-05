@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4949d9b6447c419cabf5d4861690e3b6" Name="Diagram1">
+        <EntityTypeShape EntityType="HungdonghoModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.DanhMuc" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.DonHang" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.LienHe" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.PhanHoi" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.SanPham" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HungdonghoModel.User" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="HungdonghoModel.FK__ChiTietDo__MaDon__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="HungdonghoModel.FK__ChiTietDon__MaSP__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="HungdonghoModel.FK__DonHang__MaUser__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="HungdonghoModel.FK__PhanHoi__MaUser__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="HungdonghoModel.SanPham_DanhMuc" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

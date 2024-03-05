@@ -1,0 +1,155 @@
+﻿@model IEnumerable<WebHungdongho.Models.DonHang>
+@{
+    ViewBag.Title = "DonHangkhachhang";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+    .empty-cart-message {
+        font-size: 18px;
+        color: #555;
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 200px 0;
+    }
+</style>
+<br />
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <span>Đơn Hàng</span>
+</div><br />
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("key")
+    <input type="submit" value="Tìm kiếm" />
+}
+@if (!string.IsNullOrEmpty(ViewBag.cr))
+{
+    <p style="color:red">@ViewBag.cr</p>
+}
+@if (!string.IsNullOrEmpty(ViewBag.check))
+{
+    <p style="color:red">@ViewBag.check</p>
+}
+else
+{
+    <br /> <br />
+    if (Model != null)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayDatHang)
+                </th>
+                <th>
+                    Thời gian nhận hàng
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TongTien)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoTenDem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ten)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    @{
+                        DateTime ngayDatHang;
+                        if (item.NgayDatHang is DateTime)
+                        {
+                            ngayDatHang = (DateTime)item.NgayDatHang;
+                        }
+                        else
+                        {
+                            ngayDatHang = DateTime.MinValue; // hoặc giá trị mặc định khác phù hợp
+                        }
+                    }
+                    <td>
+                        @ngayDatHang.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        Dự kiến 3 ngày
+                    </td>
+                    <td>
+                        @Html.Raw(string.Format("{0:#,##0}₫", item.TongTien * 1000))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTenDem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ten)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ChiTietDonHang", "DonHangs", new { maDonHang = item.MaDonHang })">Xem chi tiết</a>
+                    </td>
+
+                </tr>
+                        }
+
+
+
+        </table>
+        <br /><br /><br /><br /><br />
+
+                        }
+                        else
+                        {
+
+        <p class="empty-cart-message">Đơn hàng đang trống, bạn hãy tiếp tục mua sản phẩm <a href="@Url.Action("Index", "Index")"> Trang chủ</a></p>
+                        }    
+                        
+ }

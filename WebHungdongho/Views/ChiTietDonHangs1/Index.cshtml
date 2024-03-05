@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WebHungdongho.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .product-image {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 5px;
+    }
+</style>
+<h2 style="text-align:center">Chi tiết đơn hàng</h2>
+
+<p>
+    @Html.ActionLink("Thêm", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.DuongDanHinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaSP)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DonHang.HoTenDem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonHang.Ten)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/img/@item.SanPham.DuongDanHinh" alt="Product Image" class="product-image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.Raw(string.Format("{0:#,##0}₫", item.GiaSP))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonHang.HoTenDem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonHang.Ten)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaDonHang, id2 = item.MaSP }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.MaDonHang, id2 = item.MaSP })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Quay lại", "Index", "DonHangs")
+</div>

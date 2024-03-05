@@ -1,0 +1,154 @@
+﻿@model WebHungdongho.Models.SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layoutuser2.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .product-details {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .product-info {
+        max-width: 600px;
+    }
+
+        .product-info h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+    .colorful-button {
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+
+        .colorful-button:hover {
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+            box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+    h1 span#ContentPlaceHolder1_Label1 {
+        color: #333;
+        font-size: 24px;
+        margin: 10px 0 5px 0;
+        margin-bottom: 30px;
+    }
+
+    .product-details img {
+        width: 387px;
+        height: 481px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .khuyenmai {
+        background-color: #F5F5F5;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+        .khuyenmai p {
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+            .khuyenmai p i {
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và văn bản */
+            }
+</style>
+
+<br />
+
+<div class="breadcrumb">
+    <a href="@Url.Action("Index", "Index")">Trang chủ</a>
+    <span>&gt;</span>
+    <a href="@Url.Action("Index", "Index")">Đồng hồ chính hãng</a>
+    <span>&gt;</span>
+    <span>@Model.TenSP</span>
+</div>
+<div class="product-details">
+    <img src="/img/@Model.DuongDanHinh" alt="Product Image">
+    <div class="product-info">
+        <h1>@Model.TenSP</h1>
+        <p style="margin-bottom:50px">@Model.MoTa</p>
+        <div style="font-size:22px; display:flex; justify-content:space-between">
+            <p><strong>Giá tại shop: </strong></p>
+            <p style="font-weight:bold;">@(Model.Gia.HasValue ? Model.Gia.Value.ToString("#,##0") : "N/A")₫</p>
+        </div>
+        @*<button class="colorful-button" onclick="addToCart(@Model.MaSP)">Đặt hàng ngay</button>*@
+
+        <a style="text-decoration:none" href="@Url.Action("AddToCart", "Chitietsanpham", new { id=Model.MaSP })" class="colorful-button" onclick="addToCart()">Đặt hàng ngay</a>
+
+        <div class="khuyenmai">
+            <p><i class="fas fa-shield-alt"></i>Tặng gói bảo hiểm 5 năm khi mua đồng hồ nguyên giá từ 5 triệu trở lên</p>
+            <p><i class="fas fa-battery-full"></i>Miễn phí thay pin trọn đời cho sản phẩm</p>
+            <p><i class="fas fa-truck"></i>Miễn phí giao hàng trên toàn quốc</p>
+            <p><i class="fas fa-globe"></i>Bảo hành chính hãng trên toàn cầu</p>
+            <p><i class="fas fa-money-check-alt"></i>Hoàn tiền gấp 10 lần nếu phát hiện hàng giả</p>
+            <p><i class="fas fa-exchange-alt"></i>Đổi hàng dễ dàng trong 7 ngày</p>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        function addToCart() {
+            alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+
+        }
+    </script>
+}

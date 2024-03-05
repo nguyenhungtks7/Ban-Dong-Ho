@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebHungdongho.Models.PhanHoi>
+
+
+<h2>Danh sách Phản Hồi</h2>
+
+<table class="table">
+    <tr>
+        <th>Mã Phản Hồi</th>
+        <th>Tên Người Dùng</th>
+        <th>Nội Dung</th>
+        <th>Ngày Phản Hồi</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaPhanHoi</td>
+            <td>@item.User.HoTenDem + @item.User.Ten</td>
+            <td>@item.NoiDung</td>
+            <td>@item.NgayPhanHoi</td>
+        </tr>
+    }
+</table>
+
+<h2>Bình Luận</h2>
+<form method="post" action="@Url.Action("AddComment", "Binhluan")">
+    <div class="form-group">
+        <label for="NoiDung" class="control-label">Nội Dung</label>
+        <input type="text" id="NoiDung" name="NoiDung" class="form-control" placeholder="Nhập nội dung" />
+    </div>
+
+    <div style="display: flex; justify-content: space-between">
+        <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
+    </div>
+</form>
+
+
